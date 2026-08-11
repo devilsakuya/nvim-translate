@@ -10,22 +10,24 @@ local request_id = 0
 
 -- Spinner state
 local spinner_timer = nil
-local spinner_frames = { "|", "/", "-", "\\" }
 local spinner_idx = 1
 
 local spinner_stop -- forward declaration
 
 local function spinner_start()
   spinner_stop()
+  local cfg = config.get()
+  local frames = cfg.spinner_frames or { "|", "/", "-", "\\" }
+  local interval = cfg.spinner_interval or 120
   spinner_idx = 1
   spinner_timer = vim.uv.new_timer()
-  spinner_timer:start(0, 120, vim.schedule_wrap(function()
+  spinner_timer:start(0, interval, vim.schedule_wrap(function()
     if not hover.is_open() then
       spinner_stop()
       return
     end
-    hover.update({ "  " .. spinner_frames[spinner_idx] .. "  Translating..." })
-    spinner_idx = (spinner_idx % #spinner_frames) + 1
+    hover.update({ "  " .. frames[spinner_idx] .. "  Translating..." })
+    spinner_idx = (spinner_idx % #frames) + 1
   end))
 end
 

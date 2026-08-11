@@ -118,7 +118,20 @@ All options with defaults:
 
   -- Floating window display
   border = "rounded",
+
+  -- Spinner
+  spinner_frames = { "|", "/", "-", "\\" }, -- character sequence for loading spinner
+  spinner_interval = 120,                 -- ms between spinner frames
 }
+```
+
+### Custom Spinner Example
+
+```lua
+require("nvim-translate").setup({
+  spinner_frames = { ".  ", ".. ", "...", " ..", "  .", "   " },
+  spinner_interval = 200,
+})
 ```
 
 ## Usage

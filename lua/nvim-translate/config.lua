@@ -62,6 +62,10 @@ M.defaults = {
 
   -- Floating window display
   border = "rounded",
+
+  -- Spinner
+  spinner_frames = { "|", "/", "-", "\\" },
+  spinner_interval = 120, -- ms
 }
 
 M.options = {}
